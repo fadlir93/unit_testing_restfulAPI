@@ -44,12 +44,34 @@ describe('Books', () => {
             .send(book)
             .end((err, res) => {
                 // console.log(res.request.header)
-                res.should.have.status(200);
+                res.should.have.status(400);
                 res.body.should.be.a('object');
                 res.body.should.have.property('errors');
                 res.body.errors.should.have.property('pages');
                 res.body.errors.pages.should.have.property('kind').eql('required');
                 res.body.errors.pages.should.have.property('name').eql('ValidatorError');
+                done();
+            })
+        })
+
+        it('it should POST a book', done => {
+            let book = {
+                title : "Final Fantary Child Emperor",
+                author : "Robert DW.J",
+                year : 2010,
+                pages : 1200
+            }
+        chai.request(server)
+            .post('/book')
+            .send(book)
+            .end( (err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('message').eql('Book Successfully added!');
+                res.body.book.should.have.property('title');
+                res.body.book.should.have.property('author');
+                res.body.book.should.have.property('pages');
+                res.body.book.should.have.property('year');
                 done();
             })
         })

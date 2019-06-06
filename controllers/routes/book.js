@@ -13,7 +13,7 @@ function postBook(req, res) {
     var newBook = new Book(req.body);
     newBook.save((err, book) => {
         if(err) {
-            res.send(err);
+            res.status(400).send(err);
         } else {
             res.json({message : "Book Successfully added!", book});
         }

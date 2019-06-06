@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && node server.js",
+    "start": "NODE_ENV=dev node server.js",
     "test": "mocha --timeout 10000"
   },
   "author": "",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4"
   }
 }

@@ -29,4 +29,29 @@ describe('Books', () => {
                 })
         })
     })
+
+    describe('/POST book', () => {
+        it('it should not POST a book without pages field', (done) => {
+            let book = {
+                title: "The Lord of the Rings",
+                author: "J.R.R. Tolkien",
+                year: 1954
+            }
+            // req.header['x-access-token'] = 'someValue'
+        chai.request(server)            
+            .post('/book')
+            // .set('x-access-token', '12879182798172')
+            .send(book)
+            .end((err, res) => {
+                // console.log(res.request.header)
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('errors');
+                res.body.errors.should.have.property('pages');
+                res.body.errors.pages.should.have.property('kind').eql('required');
+                res.body.errors.pages.should.have.property('name').eql('ValidatorError');
+                done();
+            })
+        })
+    })
 })

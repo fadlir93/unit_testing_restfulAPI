@@ -11,6 +11,7 @@ let options = {
     replset : { socketOptions : {keepAlive: 1, connecTimeoutMS: 30000}}
 };
 
+mongoose.Promise = global.Promise
 mongoose.connect(config.DBHost, {useMongoClient: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error :'))
